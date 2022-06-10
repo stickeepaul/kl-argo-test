@@ -27,6 +27,8 @@ spec:
           env:
             - name: MYSQL_RANDOM_ROOT_PASSWORD
               value: "1"
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
             - name: MYSQL_DATABASE
               value: laravel-in-kubernetes
             - name: MYSQL_USER
@@ -42,7 +44,7 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /var/lib/mysql
-              subPath: mysql
+              # subPath: mysql
           resources:
             requests:
               cpu: 300m
@@ -67,6 +69,5 @@ spec:
             timeoutSeconds: 1
       volumes:
         - name: data
-          hostPath:
-            path: /mysql-data
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: laravel-in-kubernetes-mysql-pvc

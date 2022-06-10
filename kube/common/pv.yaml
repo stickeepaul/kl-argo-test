@@ -4,6 +4,8 @@ metadata:
   name: laravel-in-kubernetes-volume
   labels:
     type: local
+  annotations:
+    tilt.dev/down-policy: keep
 spec:
   storageClassName: manual
   capacity:
@@ -11,4 +13,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/home/paul/pv"
+    path: "~/pv"
