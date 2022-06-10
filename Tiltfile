@@ -52,6 +52,7 @@ docker_build('stickeepaul/lik-web_server', '.',
     live_update=[
         sync('./public', '/opt/apps/laravel-in-kubernetes/public')
     ],
+    ignore=['resources']
 )
 k8s_yaml(['kube/webserver/deployment.yaml', 'kube/webserver/service.yaml'])
 k8s_resource(
@@ -84,7 +85,7 @@ docker_build('stickeepaul/lik-cli', '.',
     live_update=[
         sync('.', '/opt/apps/laravel-in-kubernetes')
     ],
-    ignore=['kube']
+    # ignore=['kube', 'resources']
 )
 k8s_yaml(['kube/cron/cronjob.yaml'])
 k8s_resource(
@@ -94,12 +95,13 @@ k8s_resource(
     labels=['app']
 )
 
-# # # FRONTEND
-# docker_build('stickeepaul/lik-frontend', '.',
-#     target='frontend',
-#     live_update=[
-#         sync('.', '/opt/apps/laravel-in-kubernetes')
-#     ],
-#     entrypoint=['npm', 'run', 'watch']
-# )
-# k8s_resource('lik-frontend', new_name='frontend', labels=['app'])
+# FRONTEND
+docker_build('stickeepaul/lik-frontend', '.',
+    target='frontend',
+    live_update=[
+        sync('.', '/opt/apps/laravel-in-kubernetes')
+    ],
+    entrypoint=['npm', 'run', 'hot']
+)
+k8s_yaml(['kube/frontend/deployment.yaml'])
+k8s_resource('laravel-in-kubernetes-frontend', new_name='frontend', labels=['app'])
