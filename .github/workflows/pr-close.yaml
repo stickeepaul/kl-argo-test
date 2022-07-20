@@ -1,0 +1,25 @@
+name: action
+on:
+  pull_request:
+    types:
+      - closed
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitOps
+        uses: actions/checkout@v3
+        with:
+          repository: stickeepaul/example-gitops
+          token: ${{ secrets.PAT }}
+          path: gitops
+      - name: Commit to GitOps
+        working-directory: gitops
+        run: |
+          export APP_ID=pr-${{ github.event.repository.name }}-${{ github.event.number }}
+          rm -rf helm/templates/$APP_ID.yaml
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add helm/templates
+          git commit -m "Removing PR ${{ github.event.number }} from ${{ github.event.repository.name }}"
+          git push

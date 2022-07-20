@@ -1,0 +1,7 @@
+APP_ENV: production
+APP_DEBUG: false
+image:
+  tag: latest
+  pullPolicy: IfNotPresent
+ingress:
+  host: lik.com

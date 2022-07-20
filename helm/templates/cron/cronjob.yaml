@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: laravel-in-kubernetes-scheduler
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: scheduler
+              image: "stickeepaul/lik-cli:{{ .Values.image.tag }}"
+              command:
+                - php
+              args:
+                - artisan
+                - schedule:run
+              envFrom:
+                - configMapRef:
+                    name: laravel-in-kubernetes
+                - secretRef:
+                    name: laravel-in-kubernetes
+              volumeMounts:
+            - name: code
+              mountPath: /opt/apps/laravel-in-kubernetes
+      volumes:
+        - name: code
+          persistentVolumeClaim:
+            claimName: 'laravel-in-kubernetes-pvc'
+          restartPolicy: OnFailure
