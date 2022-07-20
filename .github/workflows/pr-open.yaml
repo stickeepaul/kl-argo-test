@@ -41,7 +41,7 @@ jobs:
           export IMAGE_TAG=pr-${{ github.event.number }}
           export APP_ID=pr-${{ github.event.repository.name }}-${{ github.event.number }}
           curl -sfL -o /usr/local/bin/kyml https://github.com/frigus02/kyml/releases/download/v20210610/kyml_20210610_linux_amd64 && chmod +x /usr/local/bin/kyml
-          cat ../preview.yml | kyml tmpl -e APP_ID -e IMAGE_TAG | tee helm/templates/$APP_ID.yaml
+          cat ../preview.yaml | kyml tmpl -e APP_ID -e IMAGE_TAG | tee helm/templates/$APP_ID.yaml
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add helm/templates
