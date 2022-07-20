@@ -128,6 +128,9 @@ RUN php artisan event:cache && \
     php artisan route:cache && \
     php artisan view:cache
 
+# hack for file syncing with tilt
+USER root
+
 # We need an nginx container which can pass requests to our FPM container,
 # as well as serve any static content.
 FROM nginx:1.20-alpine as web_server

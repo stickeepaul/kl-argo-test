@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-in-kubernetes-frontend
+  labels:
+    tier: frontend
+    layer: frontend
+  annotations:
+    app.kubernetes.io/ksync: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: frontend
+      layer: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+        layer: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: stickeepaul/lik-frontend:v0.0.1
+          envFrom:
+            - configMapRef:
+                name: laravel-in-kubernetes
+          volumeMounts:
+            - mountPath: /opt/apps/laravel-in-kubernetes/public
+              name: code
+      volumes:
+        - name: code
+          persistentVolumeClaim:
+            claimName: 'laravel-in-kubernetes-pvc'
