@@ -42,13 +42,13 @@ spec:
                 name: laravel-in-kubernetes
             - secretRef:
                 name: laravel-in-kubernetes
-          volumeMounts:
-            - name: code
-              mountPath: /opt/apps/laravel-in-kubernetes
-      volumes:
-        - name: code
-          hostPath:
-            path: /laravel/
-            type: DirectoryOrCreate
+      #     volumeMounts:
+      #       - name: code
+      #         mountPath: /opt/apps/laravel-in-kubernetes
+      # volumes:
+      #   - name: code
+      #     hostPath:
+      #       path: /laravel/
+      #       type: DirectoryOrCreate
           # persistentVolumeClaim:
       #       claimName: 'laravel-in-kubernetes-pvc'
