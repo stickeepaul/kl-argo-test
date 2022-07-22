@@ -13,26 +13,6 @@ spec:
       storage: 1Gi
 
 ---
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  annotations:
-    sealedsecrets.bitnami.com/cluster-wide: "true"
-  creationTimestamp: null
-  name: laravel-in-kubernetes-mysql
-spec:
-  encryptedData:
-    DB_PASSWORD: AgCaNd5nA95Prponpf+xKl6Yq/oHh1gX9Bdc/SsJ1APBF55bwLmL+NUecLep2GGN4zrGLX4oj5s1sfXrK8uKSykIoV9oEAYmotJGf45szTDnPigyDCcTf/BT8h5a52d/yxKgYU8hc19AqNo9NyYCMmxVmvDLPqWXnBRaG1Gu7zJr38z2FlpFyYXGqqL208PjI5VNkrNxUuBt8KPGPRBtk3KT7z306E1jl1peizJ291g+vHLZFMpMAaBx/m/JKQaHm3NV9+61iIkI5SQujKTWd1NQmV4pm2VuS029vPjo2kg4AJ8bSTfBynX4JaDZ+otOzv+1H+tppKg5yxZc9ByOdX31gFe33XRjs5dRIZtAU+CrQss28vSIpTAvqz9vz1mX+DzdRpG98HFvXrQHopiP+te9uojoutbwl88EP8MPCXrXHudCB6eSYYW2paByZpBRiE01o0uhB7Cq0TlROS1LqFcb3VzeZSa/NZ1Phr4AL6hgq8wrbBA7n/pO2OTDoM2+4TnOyR8dCt/Fqi0EXqYNNx+q8DBPFv4jYPQ1pKQHjePo2IkQHdurUoz5RJ/SdOu/Q5xgUOKt1XmefvqxZC9eAB9qePMv5St5LVinDK/8FRlPzpLc0zPrLRMT+kN+9cSpihCDvSQXJSaZyxf0uxEfeEIjWITCPUcSXThtPVcYxJEmVWHcwqVM71fykI0oFWZ0OF6ata2Srnmg4ZmYxt1ROPPXgw==
-    DB_USERNAME: AgCdScOJDeuy2rr+wiT2oQGy2ArKU/7kk0UZn4APnUqUzEjT34U45quSPDhspEgSeZaHGoqs08NXZ8p8BWC1pCPi0Ie+a9Fx9Ptq2g88z7s4n4sQLx24D8MuECOtAk4AQrIusD5ubTXId8xmvVKOHBtT83pGAHbofJjFCGuLaIYgVimtNhRwh0Z6EaHkYclXvKRUrTFy6UkzpuARaCFqtxkzB0DzIuh3tlZOPdQWWsD4r96gVtCp0q+rqC5NdcN50DAfja1N8j2a5ruQssxOAVOw23qWru1U0kVrKnuqaL5yOHXsW5D8SJOJYiwRcXmA0iUOVuqaRGvQvn6+rwjBr3qQsgW01lEa0Dt9f135ldWa47WCij3hkSij26HQvrn1pLetkW5vzPv3Lk68dT1cNcYuSaQbS8tWLkx8+MwIQtN7xO2x1vI/MhoHxjKQl9rwIqU+XKhp0m1guC/w+q1S8riQa6z70tOwj4XjMHCGmbKzgJkVbCy5U5zDsJVDKozXDrb7B6a3vs6Rwla8Kk8J0mtcglymP1eNAvgTE+FK1zG8nugTd1a9XACIpUT09A3etovdEEg1Y/FChWxqNJOoR3gSL08lyVWngjPU2qcutWCUUwJ1M+MMVkHjMoXUB9mE31ePoM48jOYzz+n5OK9if2D3n4p+SS4Ve0XQnGuiLPbZ+PCAK9jNX0Wyt8akluL+sDvYJnNQG/wLdYXy3Q==
-  template:
-    metadata:
-      annotations:
-        sealedsecrets.bitnami.com/cluster-wide: "true"
-      creationTimestamp: null
-      name: laravel-in-kubernetes-mysql
-    type: Opaque
-
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -69,12 +49,12 @@ spec:
             - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:
-                  name: laravel-in-kubernetes-mysql
+                  name: laravel-in-kubernetes
                   key: DB_USERNAME
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: laravel-in-kubernetes-mysql
+                  name: laravel-in-kubernetes
                   key: DB_PASSWORD
           volumeMounts:
             - name: data
