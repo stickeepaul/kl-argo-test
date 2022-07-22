@@ -28,4 +28,4 @@ spec:
       #   - name: code
       #     persistentVolumeClaim:
       #       claimName: 'laravel-in-kubernetes-pvc'
-      #     restartPolicy: OnFailure
+          restartPolicy: OnFailure
