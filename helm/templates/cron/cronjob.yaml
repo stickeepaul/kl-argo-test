@@ -21,11 +21,11 @@ spec:
                     name: laravel-in-kubernetes
                 - secretRef:
                     name: laravel-in-kubernetes
-              volumeMounts:
-            - name: code
-              mountPath: /opt/apps/laravel-in-kubernetes
-      volumes:
-        - name: code
-          persistentVolumeClaim:
-            claimName: 'laravel-in-kubernetes-pvc'
-          restartPolicy: OnFailure
+      #         volumeMounts:
+      #       - name: code
+      #         mountPath: /opt/apps/laravel-in-kubernetes
+      # volumes:
+      #   - name: code
+      #     persistentVolumeClaim:
+      #       claimName: 'laravel-in-kubernetes-pvc'
+      #     restartPolicy: OnFailure

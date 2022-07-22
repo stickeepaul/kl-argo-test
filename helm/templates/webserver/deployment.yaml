@@ -26,10 +26,10 @@ spec:
             # Inject the FPM Host as we did with Docker Compose
             - name: FPM_HOST
               value: laravel-in-kubernetes-fpm:9000
-          volumeMounts:
-            - name: code
-              mountPath: /opt/apps/laravel-in-kubernetes/public
-      volumes:
-        - name: code
-          persistentVolumeClaim:
-            claimName: 'laravel-in-kubernetes-pvc'
+      #     volumeMounts:
+      #       - name: code
+      #         mountPath: /opt/apps/laravel-in-kubernetes/public
+      # volumes:
+      #   - name: code
+      #     persistentVolumeClaim:
+      #       claimName: 'laravel-in-kubernetes-pvc'
